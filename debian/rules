@@ -47,7 +47,7 @@ override_dh_auto_configure:
 override_dh_auto_build-indep:
 	$(MAKE) -C man
 	$(MAKE) doxygen
-	find doc/api/html -name "*.md5" -print -delete
+	-find doc/api/html -name "*.md5" -print -delete
 
 # The check target would unnecessarily build the software
 override_dh_auto_test-indep:
