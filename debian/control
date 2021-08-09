@@ -2,15 +2,19 @@ Source: corosync
 Section: admin
 Priority: optional
 Maintainer: Proxmox Support Team <support@proxmox.com>
-Standards-Version: 4.3.0
+Standards-Version: 4.5.1
 Build-Depends:
  debhelper (>= 12~),
  dctrl-tools,
+# maybe too strict, but the buster dwz failed:
+ dwz (>= 0.13-5),
  groff,
  libdbus-1-dev,
  libknet-dev,
+ libnozzle-dev,
 # protect backports from silent log loss (#898266):
  libqb-dev (>= 1.0.3),
+ libreadline-dev,
  libsnmp-dev,
 # libstatgrab is Linux-only until #823899 and #823900 gets fixed:
  libstatgrab-dev [linux-any],
@@ -21,6 +25,7 @@ Build-Depends:
 Build-Depends-Indep:
  doxygen,
  graphviz,
+Rules-Requires-Root: no
 Homepage: https://corosync.github.io/corosync/
 Vcs-Git: git://git.proxmox.com/git/corosync-pve
 Vcs-Browser: https://git.proxmox.com/?p=corosync-pve.git
@@ -66,6 +71,18 @@ Description: cluster engine notification daemon
  ${S:X-Common-Description}
  .
  This package contains the DBus/SNMP notification daemon for Corosync events.
+
+Package: corosync-vqsim
+Architecture: any
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+Description: cluster engine votequorum simulator
+ ${S:X-Common-Description}
+ .
+ This package contains the Corosync votequorum simulator.  It
+ can simulate multiple nodes, network splits and a basic quorum device.
 
 Package: corosync-doc
 Section: doc
